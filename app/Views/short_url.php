@@ -1,6 +1,7 @@
 <?= $this->extend('layout') ?>
 
 <?= $this->section('content') ?>
+    <!-- <img src="<?= $qrcode ?>" width="500" height="500" alt="Red dot" /> -->
     <div class="col">
         
         <dl class="row">
