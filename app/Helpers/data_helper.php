@@ -36,3 +36,7 @@ function decodeData($text = ""){
     $set = encodeSet($text);
     return openssl_decrypt($set[0], $set[1], $set[2]);
 }
+
+function getCurrentURL(){
+    return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+}

@@ -1,7 +1,7 @@
 $(document).ready(function() {
     var table = $('#data_list').DataTable({
         data: listData,
-        order: [ 3, 'asc' ],
+        order: [ 3, 'desc' ],
         columns: [
             {
                 data: null,

@@ -30,12 +30,25 @@ class ShortUrlModel extends Model
         return $db->table($this->table);
     }
 
-    public function getData(){
+    public function getData($params=[]){
         $builder = $this->buildDB();
 
         $selectFields = $this->allowedFields;
         $selectFields[] = 'id';
-        $data = $builder->select($selectFields)->where('deleted_at is null')->orderBy('created_at', 'DESC')->get()->getResultArray();
+
+        $builder = $builder->select($selectFields)->where('deleted_at is null');
+
+        if(!empty($params['filter'])){
+            $filter = $params['filter'];
+            if(!empty($filter['id'])){
+                $builder = $builder->where('id', $filter['id']);
+            }
+            if(!empty($filter['short_url'])){
+                $builder = $builder->where('short_url', $filter['short_url']);
+            }
+        }
+
+        $data = $builder->orderBy('created_at', 'DESC')->get()->getResultArray();
         return $data;
     }
 
