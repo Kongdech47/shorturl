@@ -11,44 +11,88 @@ use Endroid\QrCode\Writer\PngWriter;
 
 class ShortURL extends BaseController
 {
+    public function __construct()
+    {
+        helper(['data']);
+        $this->ShortUrlModel = new \App\Models\ShortUrlModel();
+    }
     public function index()
     {
-        $writer = new PngWriter();
+        $listData = $this->ShortUrlModel->getData();
 
-        // Create QR code
-        $qrCode = QrCode::create('Data')
-            ->setEncoding(new Encoding('UTF-8'))
-            ->setErrorCorrectionLevel(new ErrorCorrectionLevelLow())
-            ->setSize(300)
-            ->setMargin(10)
-            ->setRoundBlockSizeMode(new RoundBlockSizeModeMargin())
-            ->setForegroundColor(new Color(0, 0, 0))
-            ->setBackgroundColor(new Color(255, 255, 255));
-        
-        /*
-        // Create generic logo
-        $logo = Logo::create(__DIR__.'/assets/symfony.png')
-            ->setResizeToWidth(50);
-        
-        // Create generic label
-        $label = Label::create('Label')
-            ->setTextColor(new Color(255, 0, 0));
-        
-        $result = $writer->write($qrCode, $logo, $label);
-        */
-        $result = $writer->write($qrCode);
+        return view('short_url', [
+            'listData' => $listData,
+        ]);
+    }
 
-        
-        // Directly output the QR code
-        header('Content-Type: '.$result->getMimeType());
-        // echo $result->getString();
+    public function ListAll(){
+        $data = $this->ShortUrlModel->getData();
 
-        // Save it to a file
-        // $result->saveToFile(__DIR__.'/qrcode.png');
+        return $this->response->setJSON([
+            'data' => $data
+        ]);
+    }
 
-        // Generate a data URI to include image data inline (i.e. inside an <img> tag)
-        $qr_code_base64 = $result->getDataUri();
+    public function save(){
+        try {
+            $input = $_POST;
 
-        return view('short_url', ['qrcode' => $qr_code_base64]);
+            if (!$this->ShortUrlModel->checkDuplicate($input)) {
+                return $this->response->setJSON([
+                    'error' => "URL ซ้ำ <br>กรุณากรอก URL ใหม่อีกครั้ง"
+                ]);
+            }else{
+                if(empty($input['short_url'])){
+                    $randText = generateRandomString();
+                    $input['short_url'] = base_url($randText);
+                    // Create QR code
+                    $writer = new PngWriter();
+                    $qrCode = QrCode::create($input['short_url'])
+                        ->setEncoding(new Encoding('UTF-8'))
+                        ->setErrorCorrectionLevel(new ErrorCorrectionLevelLow())
+                        ->setSize(300)
+                        ->setMargin(10)
+                        ->setRoundBlockSizeMode(new RoundBlockSizeModeMargin())
+                        ->setForegroundColor(new Color(0, 0, 0))
+                        ->setBackgroundColor(new Color(255, 255, 255));
+                    $result = $writer->write($qrCode);
+                    $qr_code_base64 = $result->getDataUri();
+                    $input['qrcode'] = $qr_code_base64;
+                }
+
+                $this->ShortUrlModel->save($input);
+
+                return $this->response->setJSON([
+                    'success' => "บันทึกข้อมูลเรียบร้อย"
+                ]);
+            }
+        } catch (\Throwable $th) {
+            return $this->response->setJSON([
+                'error' => $th->getMessage()
+            ]);
+        }
+    }
+
+    public function del(){
+        try {
+            $input = $_POST;
+            $id = $input['id'] ?? "";
+
+            if(!empty($id)){
+                $this->ShortUrlModel->delete($id);
+
+                return $this->response->setJSON([
+                    'success' => "ลบข้อมูลเรียบร้อย"
+                ]);
+            }else{
+                return $this->response->setJSON([
+                    'error' => "ไม่พบรายการข้อมูล"
+                ]);
+            }
+        } catch (\Throwable $th) {
+            return $this->response->setJSON([
+                'error' => $th->getMessage()
+            ]);
+        }
     }
 }

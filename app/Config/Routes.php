@@ -33,6 +33,10 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 // $routes->get('/', 'Home::index');
 $routes->get('/', 'ShortURL::index');
+$routes->get('shorturl', 'ShortURL::index');
+$routes->add('shorturl/ListAll', 'ShortURL::ListAll');
+$routes->add('shorturl/save', 'ShortURL::save');
+$routes->add('shorturl/del', 'ShortURL::del');
 
 /*
  * --------------------------------------------------------------------
