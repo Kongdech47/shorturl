@@ -158,7 +158,10 @@ $.extend(true, $.fn.dataTable.defaults, {
         zeroRecords: "ไม่พบข้อมูล",
         emptyTable: "ไม่พบข้อมูล",
         info: "แสดง _START_ ถึง _END_ จากทั้งหมด _TOTAL_ รายการ",
+        infoEmpty: "ไม่มีข้อมูล",
+        infoFiltered: "(กรอกจากทั้งหมด _MAX_ รายการ)",
         lengthMenu: "แสดง _MENU_ รายการต่อหน้า",
+        search: "ค้นหา",
         paginate: {
             first: "แรกสุด",
             last: "ท้ายสุด",
