@@ -32,12 +32,17 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->add('/(:any)', 'Home::index/$1');
+
 $routes->get('home', 'Home::index');
+$routes->post('home/addurl', 'Home::addShortURL');
+
 $routes->get('shorturl', 'ShortURL::index');
 $routes->post('shorturl/ListAll', 'ShortURL::ListAll');
 $routes->post('shorturl/save', 'ShortURL::save');
 $routes->post('shorturl/del', 'ShortURL::del');
+
 $routes->get('logurl', 'LogURL::index');
+
 $routes->get('statisticsurl', 'StatisticsURL::index');
 $routes->get('statisticsurl/(:any)', 'StatisticsURL::add/$1');
 

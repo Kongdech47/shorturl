@@ -57,25 +57,25 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-5">
+        <div class="row mt-4 d-none show-short-url">
             <div class="col-md-8 m-auto text-center">
                 <label class="form-label mb-0"><h5 class="mb-1"><b>QR Code</b></h5></label>
                 <div class="input-group input-group-sm mb-0 justify-content-center">
-                    <img src="https://chart.googleapis.com/chart?chs=200x200&amp;cht=qr&amp;chl=https%3A%2F%2Fzhort.link%2FFuN" title="QR Code" alt="QR Code" id="qr" class="qr">
+                    <img src="" title="QR Code" alt="QR Code" id="qrcode" width="200">
                 </div>
                 <small>สแกนเพื่อเปิด URL</small>
             </div>
         </div>
-        <div class="row">
+        <div class="row d-none show-short-url">
             <div class="col-md-8 m-auto">
                 <label class="form-label mb-0"><h6 class="mb-1"><b>URL แบบย่อ</b></h6></label>
                 <div class="input-group input-group-sm mb-3">
-                    <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon3">
-                    <span class="input-group-text" id="basic-addon3" role="button"><b>คัดลอก</b></span>
+                    <input type="text" class="form-control" placeholder="" id="input-copy_short_url" aria-describedby="btn-copy_short_url" readonly>
+                    <span class="input-group-text" onclick="copyToClipboard('input-copy_short_url')" id="btn-copy_short_url" role="button"><b>คัดลอก</b></span>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row d-none show-short-url">
             <div class="col-md-8 m-auto">
                 <div class="input-group input-group-sm mb-0 justify-content-center">
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -177,8 +177,11 @@
 </html>
 
 <script>
+    var CSRF_TOKEN = "<?= csrf_token() ?>";
+
     var listStatistics = '<?= json_encode($listStatistics) ?>';
     listStatistics = JSON.parse(listStatistics);
+
     var listDataShorturl = '<?= json_encode($listDataShorturl) ?>';
     listDataShorturl = JSON.parse(listDataShorturl);
 </script>

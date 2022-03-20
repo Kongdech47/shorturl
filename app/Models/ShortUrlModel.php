@@ -47,6 +47,9 @@ class ShortUrlModel extends Model
             if(!empty($filter['short_url'])){
                 $builder = $builder->where('short_url', $filter['short_url']);
             }
+            if(!empty($filter['url'])){
+                $builder = $builder->where('url', $filter['url']);
+            }
         }
 
         if(isset($params['limit'])){

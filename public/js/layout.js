@@ -172,3 +172,14 @@ $.extend(true, $.fn.dataTable.defaults, {
 });
 
 // END DATATABLE
+
+
+
+
+
+function copyToClipboard(id) {
+    var copy_text_val = document.getElementById(id);
+    copy_text_val.select();
+    document.execCommand("copy");
+    // console.log(copy_text_val.value);
+}

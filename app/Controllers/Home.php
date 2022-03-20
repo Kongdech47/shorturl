@@ -1,6 +1,14 @@
 <?php
 
 namespace App\Controllers;
+use Endroid\QrCode\Color\Color;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelLow;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Label\Label;
+use Endroid\QrCode\Logo\Logo;
+use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
+use Endroid\QrCode\Writer\PngWriter;
 
 class Home extends BaseController
 {
@@ -46,5 +54,83 @@ class Home extends BaseController
             'listStatistics' => $listDataStatistics,
             'listDataShorturl' => $listDataShorturl
         ]);
+    }
+
+    public function addShortURL(){
+        try {
+            $input = $_POST;
+            $url = $input['url'] ?? "";
+
+            if(!empty($url)){
+                $chkData = $this->ShortUrlModel->getData([
+                    'filter' => [
+                        'url' => $url
+                    ],
+                    'limit' => 1
+                ]);
+                $short_url = $chkData[0]['short_url'] ?? [];
+                $qrcode = $chkData[0]['qrcode'] ?? [];
+
+                if(empty($short_url)){
+                    $chk = false;
+                    while(!$chk) {
+                        $randText = generateRandomString();
+                        $short_url = base_url($randText);
+
+                        if ($this->ShortUrlModel->checkDuplicate([
+                            'short_url' => $short_url
+                        ], 'short_url')) {
+                            $chk = true;
+                        }
+                    } 
+
+                    // Create QR code
+                    $writer = new PngWriter();
+                    $qrCode = QrCode::create($short_url)
+                        ->setEncoding(new Encoding('UTF-8'))
+                        ->setErrorCorrectionLevel(new ErrorCorrectionLevelLow())
+                        ->setSize(300)
+                        ->setMargin(10)
+                        ->setRoundBlockSizeMode(new RoundBlockSizeModeMargin())
+                        ->setForegroundColor(new Color(0, 0, 0))
+                        ->setBackgroundColor(new Color(255, 255, 255));
+                    $result = $writer->write($qrCode);
+                    $qr_code_base64 = $result->getDataUri();
+                    $qrcode = $qr_code_base64;
+
+                    $this->ShortUrlModel->save([
+                        'url' => $url,
+                        'short_url' => $short_url,
+                        'qrcode' => $qrcode
+                    ]);
+
+                    return $this->response->setJSON([
+                        'success' => "ย่อ URL เรียบร้อย",
+                        'data' => [
+                            'short_url' => $short_url,
+                            'qrcode' => $qrcode,
+                            'type' => 'new'
+                        ]
+                    ]);
+                }else{
+                    return $this->response->setJSON([
+                        'success' => "ย่อ URL เรียบร้อย",
+                        'data' => [
+                            'short_url' => $short_url,
+                            'qrcode' => $qrcode,
+                            'type' => 'old'
+                        ]
+                    ]);
+                }
+            }else{
+                return $this->response->setJSON([
+                    'error' => "กรุณากรอก URL"
+                ]);
+            }
+        } catch (\Throwable $th) {
+            return $this->response->setJSON([
+                'error' => $th->getMessage()
+            ]);
+        }
     }
 }

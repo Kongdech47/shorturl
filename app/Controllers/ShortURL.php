@@ -76,7 +76,7 @@ class ShortURL extends BaseController
                 $this->ShortUrlModel->save($input);
 
                 return $this->response->setJSON([
-                    'success' => "บันทึกข้อมูลเรียบร้อย"
+                    'success' => "บันทึกข้อมูลเรียบร้อย",
                 ]);
             }
         } catch (\Throwable $th) {

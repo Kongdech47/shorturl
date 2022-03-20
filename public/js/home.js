@@ -121,10 +121,35 @@ $(document).ready(function() {
     }).on('shown.bs.modal', function() {}).on('hodden.bs.modal', function() {});
 
     
-    // $("#btn-create_short_url").off("click.create_short_url").on("click.create_short_url", function() { 
-    //     var url = $('#input-create_short_url').val();
-    //     if(url){
-    //         SwalLoading({text: ' '});
-    //     }
-    // });
+
+    $("#btn-create_short_url").off("click.create_short_url").on("click.create_short_url", function() { 
+        var url = $('#input-create_short_url').val();
+        if(url){
+            SwalLoading({title: ' '});
+
+            var saveData = {
+                csrf_token: CSRF_TOKEN,
+                url: url
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "home/addurl",
+                data: saveData,
+                dataType:'json',
+                success: function(result) {
+                    if(SwalShowSuccessAjax(result)){
+                        var result = result.data;
+                        $("#qrcode").attr('src', result.qrcode);
+                        $("#input-copy_short_url").val(result.short_url);
+                        $('.show-short-url').removeClass('d-none');
+                    }
+                },
+                error: function(result) {
+                    SwalShowErrorMessage(result);
+                },
+                complete: function(result) {}
+            });
+        }
+    });
 } );
