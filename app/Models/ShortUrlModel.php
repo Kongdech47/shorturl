@@ -52,13 +52,13 @@ class ShortUrlModel extends Model
         return $data;
     }
 
-    public function checkDuplicate($data){
+    public function checkDuplicate($data, $key="url"){
         $status = false;
 
-        if(!empty($data['url'])){
+        if(!empty($data[$key])){
             $builder = $this->buildDB();
 
-            $builder = $builder->select('count(id) as _rows')->where('url', $data['url'])->where('deleted_at is null');
+            $builder = $builder->select('count(id) as _rows')->where($key, $data[$key])->where('deleted_at is null');
             if(!empty($data['id'])){
                 $builder = $builder->where('id !=', $data['id']);
             }

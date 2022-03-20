@@ -45,11 +45,22 @@ class ShortURL extends BaseController
                 ]);
             }else{
                 if(empty($input['short_url'])){
-                    $randText = generateRandomString();
-                    $input['short_url'] = base_url($randText);
+                    $chk = false;
+                    while(!$chk) {
+                        $randText = generateRandomString();
+                        $short_url = base_url($randText);
+
+                        if ($this->ShortUrlModel->checkDuplicate([
+                            'short_url' => $short_url
+                        ], 'short_url')) {
+                            $chk = true;
+                        }
+                    } 
+
+                    $input['short_url'] = $short_url;
                     // Create QR code
                     $writer = new PngWriter();
-                    $qrCode = QrCode::create($input['short_url'])
+                    $qrCode = QrCode::create($short_url)
                         ->setEncoding(new Encoding('UTF-8'))
                         ->setErrorCorrectionLevel(new ErrorCorrectionLevelLow())
                         ->setSize(300)
