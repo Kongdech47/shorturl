@@ -38,7 +38,11 @@ $(document).ready(function() {
             {
                 targets: 'short_url',
                 render: function(data, type, row, meta){
-                    return '<a href="'+(data || "#")+'" target="_blank">'+truncateString(data, 55)+'</a>';
+                    var html = '<a href="'+(data || "#")+'" target="_blank">'+truncateString(data, 30)+'</a>';
+                    if(row.name){
+                        html += '<br><small class="text-secondary">'+truncateString(row.name, 30)+'</small>';
+                    }
+                    return html;
                 }
             },
             {
@@ -89,7 +93,11 @@ $(document).ready(function() {
             {
                 targets: 'short_url',
                 render: function(data, type, row, meta){
-                    return '<a href="'+(data || "#")+'" target="_blank">'+truncateString(data, 55)+'</a>';
+                    var html = '<a href="'+(data || "#")+'" target="_blank">'+truncateString(data, 30)+'</a>';
+                    if(row.name){
+                        html += '<br><small class="text-secondary">'+truncateString(row.name, 30)+'</small>';
+                    }
+                    return html;
                 }
             },
             {
