@@ -60,6 +60,7 @@ class Home extends BaseController
         try {
             $input = $_POST;
             $url = $input['url'] ?? "";
+            $expect = trim($input['expect'] ?? "");
 
             if(!empty($url)){
                 $chkData = $this->ShortUrlModel->getData([
@@ -73,16 +74,45 @@ class Home extends BaseController
 
                 if(empty($short_url)){
                     $chk = false;
-                    while(!$chk) {
-                        $randText = generateRandomString();
-                        $short_url = base_url($randText);
 
-                        if ($this->ShortUrlModel->checkDuplicate([
-                            'short_url' => $short_url
-                        ], 'short_url')) {
-                            $chk = true;
+                    if(!empty($expect)){
+                        $expect = explode(',', $expect);
+                        if(!empty($expect)){
+                            foreach ($expect as $value) {
+                                $string = trim($value);
+                                $string_length = strlen($string);
+                                if (!preg_match('/[^A-Za-z0-9]/', $string) && $string_length >= 5 && $string_length <= 20){
+                                    $randText = $string;
+                                    $short_url = base_url($randText);
+
+                                    if ($this->ShortUrlModel->checkDuplicate([
+                                        'short_url' => $short_url
+                                    ], 'short_url')) {
+                                        $chk = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if(!$chk){
+                                return $this->response->setJSON([
+                                    'error' => "ไม่สามารถใช้รูปแบบ URL ที่ต้องการได้ รูปแบบที่กรอกอาจจะเคยถูกใช้งานไปแล้ว หรือรูปแบบที่กรอกอาจจะไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง"
+                                ]);
+                            }
                         }
-                    } 
+                    }
+
+                    if(!$chk){
+                        while(!$chk) {
+                            $randText = generateRandomString();
+                            $short_url = base_url($randText);
+    
+                            if ($this->ShortUrlModel->checkDuplicate([
+                                'short_url' => $short_url
+                            ], 'short_url')) {
+                                $chk = true;
+                            }
+                        } 
+                    }
 
                     // Create QR code
                     $writer = new PngWriter();

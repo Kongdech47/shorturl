@@ -51,12 +51,20 @@
 <body>
     <div class="container mt-5">
         <div class="row">
-            <div class="col-md-8 m-auto">
+            <div class="col-md-8 m-auto mb-3">
                 <label class="form-label mb-0"><h4 class="mb-1"><b>ใส่ URL ที่ต้องการย่อให้สั้นลง</b></h4></label>
-                <div class="input-group input-group-lg mb-3">
+                <div class="input-group input-group-lg mb-1">
                     <input type="text" class="form-control" placeholder="" id="input-create_short_url" aria-describedby="btn-create_short_url">
                     <span class="input-group-text" id="btn-create_short_url" role="button"><b>ย่อ</b></span>
                 </div>
+                <div class="input-group input-group-sm mb-1">
+                    <input type="text" class="form-control" placeholder="กรอกรูปแบบที่ต้องการ" id="input-create_short_url-expect">
+                </div>
+                <small class="text-danger">
+                    รูปแบบ URL ที่ต้องการ เช่น IamGroot, IamStreveRogers, year2022 (หากไม่มีรูปแบบที่ต้องการให้เว้นว่าง)<br>
+                    * ต้องไม่มีช่องว่าง ต้องเป็นตัวอักษาภาษาอังกฤษหรือตัวเลข และต้องมีความยาวระหว่าง 5-20<br>
+                    * กรณีที่ URl เคยถูกย่อไปแล้ว จะไม่สามารถใช้รูปแบบที่ต้องการได้
+                </small>
             </div>
         </div>
         <div class="row mt-4 d-none show-short-url">
@@ -101,7 +109,8 @@
                 <h6 class="mb-1">
                     <b>
                         เว็บไซต์สำหรับย่อลิงค์ หรือ URL ที่มีขนาดยาว ให้สั้นลงได้อย่างง่ายดาย<br>
-                        สามารถแสกน QR Code เพื่อเปิดเข้าหน้าเว็บไซต์ได้
+                        สามารถแสกน QR Code เพื่อเปิดเข้าหน้าเว็บไซต์ได้<br>
+                        และดาวน์โหลด QR Code แชร์ให้ผู้อื่นผ่านโซเชียลมีเดียได้
                     </b>
                 </h6>
             </div>
@@ -120,7 +129,7 @@
                                 <th scope="col" class="statistics">สถิติ</th>
                             </tr>
                         </thead>
-                        <tbody class="text-lowercase">
+                        <tbody>
                         </tbody>
                     </table>
                 </div>
@@ -139,7 +148,7 @@
                                 <th scope="col" class="created_at">เมื่อ</th>
                             </tr>
                         </thead>
-                        <tbody class="text-lowercase">
+                        <tbody>
                         </tbody>
                     </table>
                 </div>

@@ -37,6 +37,7 @@ $routes->get('home', 'Home::index');
 $routes->post('home/addurl', 'Home::addShortURL');
 
 $routes->get('shorturl', 'ShortURL::index');
+$routes->get('admin', 'ShortURL::index');
 $routes->post('shorturl/ListAll', 'ShortURL::ListAll');
 $routes->post('shorturl/save', 'ShortURL::save');
 $routes->post('shorturl/del', 'ShortURL::del');

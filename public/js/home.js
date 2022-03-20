@@ -129,7 +129,8 @@ $(document).ready(function() {
 
             var saveData = {
                 csrf_token: CSRF_TOKEN,
-                url: url
+                url: url,
+                expect: $('#input-create_short_url-expect').val() || ""
             };
 
             $.ajax({
