@@ -17,3 +17,22 @@ function generateRandomString($length = 5) {
     }
     return $randomString;
 }
+
+function encodeSet($text = ""){
+    $pass = '0123456789abcdefghij21klmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    return [
+        $text,
+        "AES-128-ECB",
+        $pass
+    ];
+}
+
+function encodeData($text = ""){
+    $set = encodeSet($text);
+    return openssl_encrypt($set[0], $set[1], $set[2]);
+}
+
+function decodeData($text = ""){
+    $set = encodeSet($text);
+    return openssl_decrypt($set[0], $set[1], $set[2]);
+}

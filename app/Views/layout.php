@@ -53,7 +53,7 @@
                     <a class="nav-link <?= ($menu_active ?? "") == 'logurl' ? 'active' : '' ?>" <?= ($menu_active ?? "") == 'logurl' ? 'aria-current="page"' : '' ?> href="logurl">ประวัติการย่อ URL</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">สถิติ URL</a>
+                    <a class="nav-link <?= ($menu_active ?? "") == 'statisticsurl' ? 'active' : '' ?>" <?= ($menu_active ?? "") == 'statisticsurl' ? 'aria-current="page"' : '' ?> href="statisticsurl">สถิติ URL</a>
                 </li>
             </ul>
         </div>

@@ -38,6 +38,8 @@ $routes->add('shorturl/ListAll', 'ShortURL::ListAll');
 $routes->add('shorturl/save', 'ShortURL::save');
 $routes->add('shorturl/del', 'ShortURL::del');
 $routes->get('logurl', 'LogURL::index');
+$routes->get('statisticsurl', 'StatisticsURL::index');
+$routes->get('statisticsurl/(:any)', 'StatisticsURL::add/$1');
 
 /*
  * --------------------------------------------------------------------
