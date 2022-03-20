@@ -142,6 +142,12 @@ $(document).ready(function() {
                         var result = result.data;
                         $("#qrcode").attr('src', result.qrcode);
                         $("#input-copy_short_url").val(result.short_url);
+
+                        $("#download-qrcode").attr('href', result.qrcode);
+                        $("#share-facebook button").attr('data-url', result.short_url);
+                        $("#share-twitter button").attr('data-title', "ย่อลิงค์ฟรี");
+                        $("#share-twitter button").attr('data-url', result.short_url);
+
                         $('.show-short-url').removeClass('d-none');
                     }
                 },

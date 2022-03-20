@@ -40,6 +40,8 @@
 
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.js" integrity="sha512-ztxZscxb55lKL+xmWGZEbBHekIzy+1qYKHGZTWZYH1GUwxy0hiA18lW6ORIMj4DHRgvmP/qGcvqwEyFFV7OYVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+     <script src="https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
@@ -79,14 +81,16 @@
             <div class="col-md-8 m-auto">
                 <div class="input-group input-group-sm mb-0 justify-content-center">
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                        <div class="btn-group me-2" role="group" aria-label="Third group">
-                            <button type="button" class="btn btn-secondary"><i class="fa-solid fa-download"></i></button>
+                        <div class="btn-group me-2">
+                            <a href="" download="QR Code from ShortURL.png" id="download-qrcode">
+                                <button type="button" class="btn btn-secondary"><i class="fa-solid fa-download"></i></button>
+                            </a>
                         </div>
-                        <div class="btn-group me-2" role="group" aria-label="Third group">
-                            <button type="button" class="btn btn-primary"><i class="fa-brands fa-facebook-f"></i></button>
+                        <div class="btn-group me-2" id="share-facebook">
+                            <button data-sharer="facebook" data-url="" type="button" class="btn btn-primary"><i class="fa-brands fa-facebook-f"></i></button>
                         </div>
-                        <div class="btn-group" role="group" aria-label="Third group">
-                            <button type="button" class="btn btn-info"><i class="fa-brands fa-twitter"></i></button>
+                        <div class="btn-group" id="share-twitter">
+                            <button data-sharer="twitter" data-title="" data-url="" type="button" class="btn btn-info"><i class="fa-brands fa-twitter"></i></button>
                         </div>
                     </div>
                 </div>
