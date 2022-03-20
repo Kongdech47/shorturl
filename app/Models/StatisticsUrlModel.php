@@ -25,11 +25,21 @@ class StatisticsUrlModel extends Model
     protected $validationMessages = [];
     protected $skipValidation     = false;
 
-    public function getData(){
+    public function getData($params=[]){
         $db = \Config\Database::connect();
         $builder = $db->table('short_url');
 
-        $data = $builder->select(['short_url.id', 'short_url.name', 'short_url.short_url', 'short_url.url', '(select count(*) from statistics_url where statistics_url.shorturl_id=short_url.id and statistics_url.deleted_at is null) as statistics'])->where('short_url.deleted_at is null')->orderBy('short_url.created_at', 'DESC')->get()->getResultArray();
+        if(isset($params['limit'])){
+            $builder = $builder->limit($params['limit'] ?: 0);
+        }
+
+        $builder = $builder->select(['short_url.id', 'short_url.name', 'short_url.short_url', 'short_url.url', 'short_url.qrcode', '(select count(*) from statistics_url where statistics_url.shorturl_id=short_url.id and statistics_url.deleted_at is null) as statistics'])->where('short_url.deleted_at is null');
+        
+        if(isset($params['limit'])){
+            $builder = $builder->limit($params['limit'] ?: 0);
+        }
+        
+        $data = $builder->orderBy('statistics', 'DESC')->orderBy('short_url.created_at', 'DESC')->get()->getResultArray();
         return $data;
     }
 }

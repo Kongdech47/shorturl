@@ -35,6 +35,7 @@ class ShortUrlModel extends Model
 
         $selectFields = $this->allowedFields;
         $selectFields[] = 'id';
+        $selectFields[] = 'DATE_FORMAT(created_at, "%Y-%m-%d %H:%i") as created_at';
 
         $builder = $builder->select($selectFields)->where('deleted_at is null');
 
@@ -46,6 +47,10 @@ class ShortUrlModel extends Model
             if(!empty($filter['short_url'])){
                 $builder = $builder->where('short_url', $filter['short_url']);
             }
+        }
+
+        if(isset($params['limit'])){
+            $builder = $builder->limit($params['limit'] ?: 0);
         }
 
         $data = $builder->orderBy('created_at', 'DESC')->get()->getResultArray();

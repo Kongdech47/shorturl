@@ -34,6 +34,17 @@ class Home extends BaseController
                 return redirect()->to($data['url']); 
             }
         }
-        return redirect()->route('shorturl');
+        
+        $listDataStatistics = $this->StatisticsUrlModel->getData([
+            'limit' => 10
+        ]);
+        $listDataShorturl = $this->ShortUrlModel->getData([
+            'limit' => 10
+        ]);
+
+        return view('home', [
+            'listStatistics' => $listDataStatistics,
+            'listDataShorturl' => $listDataShorturl
+        ]);
     }
 }

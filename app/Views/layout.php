@@ -40,12 +40,19 @@
 
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.js" integrity="sha512-ztxZscxb55lKL+xmWGZEbBHekIzy+1qYKHGZTWZYH1GUwxy0hiA18lW6ORIMj4DHRgvmP/qGcvqwEyFFV7OYVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="/css/layout.css">
 </head>
 <body>
     <div class="container mt-3">
         <div class="row mb-5">
             <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" href="home">หน้าแรก</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link <?= ($menu_active ?? "") == 'shorturl' ? 'active' : '' ?>" <?= ($menu_active ?? "") == 'shorturl' ? 'aria-current="page"' : '' ?> href="shorturl">ย่อ URL</a>
                 </li>

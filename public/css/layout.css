@@ -11,3 +11,7 @@
     display: none;
     border-radius: 5px;
 }
+
+html, body{
+    font-family: 'Prompt', sans-serif;
+}
