@@ -37,6 +37,7 @@ $routes->get('shorturl', 'ShortURL::index');
 $routes->add('shorturl/ListAll', 'ShortURL::ListAll');
 $routes->add('shorturl/save', 'ShortURL::save');
 $routes->add('shorturl/del', 'ShortURL::del');
+$routes->get('logurl', 'LogURL::index');
 
 /*
  * --------------------------------------------------------------------

@@ -4,7 +4,7 @@
     <div class="col">
     <div id="datatable_overlay" class="progress-bar progress-bar-striped progress-bar-streit active"><p class="m-auto">กำลังโหลดข้อมูล...</p></div>
         <dl class="row">
-            <dt class="col-sm-8"><h2>ย่อ URL</h2></dt>
+            <dt class="col-sm-8"><h2><?= $title ?></h2></dt>
             <dd class="col-sm-4 text-end"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-type="new" data-bs-target="#myModal"><i class="fa-solid fa-plus pe-2"></i>เพิ่มข้อมูล</button></dd>
         </dl>
 
@@ -39,7 +39,7 @@
                         <input type="hidden" id="id" name="id">
                         <div class="mb-3">
                             <label for="name" class="col-form-label">ชื่อ:</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
+                            <input type="text" class="form-control" id="name" name="name">
                         </div>
                         <div class="mb-3">
                             <label for="url" class="col-form-label"><p class="m-0 pe-2 float-start text-danger">*</p>URL เดิม:</label>

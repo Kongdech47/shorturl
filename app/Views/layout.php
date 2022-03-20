@@ -47,10 +47,10 @@
         <div class="row mb-5">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="shorturl">ย่อ URL</a>
+                    <a class="nav-link <?= ($menu_active ?? "") == 'shorturl' ? 'active' : '' ?>" <?= ($menu_active ?? "") == 'shorturl' ? 'aria-current="page"' : '' ?> href="shorturl">ย่อ URL</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">ประวัติการย่อ URL</a>
+                    <a class="nav-link <?= ($menu_active ?? "") == 'logurl' ? 'active' : '' ?>" <?= ($menu_active ?? "") == 'logurl' ? 'aria-current="page"' : '' ?> href="logurl">ประวัติการย่อ URL</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">สถิติ URL</a>

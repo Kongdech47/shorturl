@@ -22,6 +22,8 @@ class ShortURL extends BaseController
 
         return view('short_url', [
             'listData' => $listData,
+            'title' => 'ย่อ URL',
+            'menu_active' => 'shorturl'
         ]);
     }
 

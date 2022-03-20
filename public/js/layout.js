@@ -14,11 +14,11 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 
 
 
-$('.modal').modal({
-    backdrop: 'static',
-    keyboard: false,
-    show: false,
-});
+// $('.modal').modal({
+//     backdrop: 'static',
+//     keyboard: false,
+//     show: false,
+// });
 
 
 
