@@ -152,7 +152,7 @@ $.extend(true, $.fn.dataTable.defaults, {
     // info: true,
     // autoWidth: false,
     responsive: true,
-    pageLength: 10,
+    pageLength: 25,
     // dom: '<"datatable-top">rt<"datatable-bottom"><"clear">',
     language: {
         zeroRecords: "ไม่พบข้อมูล",
