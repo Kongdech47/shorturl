@@ -32,7 +32,7 @@ class Database extends Config
      */
     public $default = [
         'DSN'      => '',
-        'hostname' => 'mariadb',
+        'hostname' => 'db',
         'username' => 'root',
         'password' => '123456',
         'database' => 'shorturl',
