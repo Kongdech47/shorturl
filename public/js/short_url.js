@@ -5,8 +5,8 @@ $(document).ready(function() {
     }
 
     var getListData = function(){
-        $("#datatable_overlay").addClass('d-flex');
-        $("#datatable_overlay").show();
+        // $("#datatable_overlay").addClass('d-flex');
+        // $("#datatable_overlay").show();
 
         $.ajax({
             type: "POST",
@@ -23,8 +23,8 @@ $(document).ready(function() {
             },
             complete: function(result) {
                 setTimeout(function(){
-                    $("#datatable_overlay").fadeOut("slow");
-                    $("#datatable_overlay").removeClass('d-flex');
+                    // $("#datatable_overlay").fadeOut("slow");
+                    // $("#datatable_overlay").removeClass('d-flex');
                 }, 1000);
             }
         });

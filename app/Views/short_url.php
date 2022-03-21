@@ -2,7 +2,7 @@
 
 <?= $this->section('content') ?>
     <div class="col">
-    <div id="datatable_overlay" class="progress-bar progress-bar-striped progress-bar-streit active"><p class="m-auto">กำลังโหลดข้อมูล...</p></div>
+        <div id="datatable_overlay" class="progress-bar progress-bar-striped progress-bar-streit active"><p class="m-auto">กำลังโหลดข้อมูล...</p></div>
         <dl class="row">
             <dt class="col-sm-8"><h2><?= $title ?></h2></dt>
             <dd class="col-sm-4 text-end"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-type="new" data-bs-target="#myModal"><i class="fa-solid fa-plus pe-2"></i>เพิ่มข้อมูล</button></dd>
