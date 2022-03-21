@@ -96,7 +96,7 @@
         </div>
     </div>
     
-    <footer class="bd-footer mt-5 bg-secondary">
+    <!-- <footer class="bd-footer mt-5 bg-secondary">
         <div class="container p-5">
             <div class="row text-center">
                 <div class="col mb-3">
@@ -112,7 +112,7 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </footer> -->
 
 </body>
 </html>
