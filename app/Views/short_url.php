@@ -37,6 +37,7 @@
                 <div class="modal-body">
                     <form>
                         <input type="hidden" id="id" name="id">
+                        <input type="hidden" id="short_url" name="short_url">
                         <div class="mb-3">
                             <label for="name" class="col-form-label">ชื่อ:</label>
                             <input type="text" class="form-control" id="name" name="name">

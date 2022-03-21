@@ -155,6 +155,7 @@ $(document).ready(function() {
             form.find('[name=id]').val(row_data.id || "");
             form.find('[name=name]').val(row_data.name || "");
             form.find('[name=url]').val(row_data.url || "");
+            form.find('[name=short_url]').val(row_data.short_url || "");
         }else if(type == 'new'){
             modal.find('#myModalLabel p').html('เพิ่ม');
         }
@@ -164,7 +165,8 @@ $(document).ready(function() {
                 csrf_token: CSRF_TOKEN,
                 id: form.find('#id').val(),
                 name: form.find('#name').val(),
-                url: form.find('#url').val()
+                url: form.find('#url').val(),
+                short_url: form.find('#short_url').val()
             };
             if(!saveData.url){
                 SwalShowWarningMessage('กรุณากรอก URL เดิม');
