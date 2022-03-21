@@ -48,9 +48,46 @@
 
     <link rel="stylesheet" href="/css/layout.css">
 </head>
-<body>
+<body class="bg-light">
+    <header class="p-3 mb-3 border-bottom bg-secondary bg-gradient">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+                </a>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="#" class="nav-link px-2 link-light">ShortURL</a></li>
+                    <li><a href="shorturl" class="nav-link px-2 link-dark">Admin</a></li>
+                </ul>
+
+                <!-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                    <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+                </form> -->
+
+                <!-- <div class="dropdown text-end">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
+                        <li><a class="dropdown-item" href="#">New project...</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    </ul>
+                </div> -->
+            </div>
+        </div>
+    </header>
+
     <div class="container mt-5">
         <div class="row">
+            <div class="col-md-8 m-auto mb-3 text-center">
+                <img src="/img/logo.png" class="" width="400" alt="...">
+            </div>
+        </div>
+        <div class="row mt-5">
             <div class="col-md-8 m-auto mb-3">
                 <label class="form-label mb-0"><h4 class="mb-1"><b>ใส่ URL ที่ต้องการย่อให้สั้นลง</b></h4></label>
                 <div class="input-group input-group-lg mb-1">
@@ -115,7 +152,9 @@
                 </h6>
             </div>
         </div>
-        <hr>
+        <div class="row my-5">
+            <div class="col-md-8 m-auto"><hr></div>
+        </div>
         <div class="row mt-5">
             <div class="col-md-8 m-auto">
                 <label class="form-label mb-0"><h5 class="mb-1"><b>TOP 10 URL ยอดนิยม</b></h4></label>
@@ -154,7 +193,25 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
+    
+    <footer class="bd-footer mt-5 bg-secondary">
+        <div class="container p-5">
+            <div class="row text-center">
+                <div class="col mb-3">
+                    <a class="d-inline-flex align-items-center mb-2 link-light text-decoration-none" href="/" aria-label="Bootstrap">
+                    <img src="/img/logo.png" alt="..." width="50" class="d-block me-2">
+                    <span class="fs-5">ShortURL</span>
+                    </a>
+                    <ul class="list-unstyled small text-muted">
+                        <li class="mb-2 text-light">เว็บไซต์สำหรับย่อลิงค์ หรือ URL ที่มีขนาดยาว ให้สั้นลงได้อย่างง่ายดาย</li>
+                        <li class="mb-2 text-light">สามารถแสกน QR Code เพื่อเปิดเข้าหน้าเว็บไซต์ได้</li>
+                        <li class="mb-2 text-light">และดาวน์โหลด QR Code แชร์ให้ผู้อื่นผ่านโซเชียลมีเดียได้</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
     
     <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
