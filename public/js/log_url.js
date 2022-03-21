@@ -32,19 +32,19 @@ $(document).ready(function() {
             {
                 targets: 'name',
                 render: function(data, type, row, meta){
-                    return truncateString(data, 25);
+                    return data;
                 }
             },
             {
                 targets: 'short_url',
                 render: function(data, type, row, meta){
-                    return '<a href="'+(data || "#")+'" target="_blank">'+truncateString(data, 55)+'</a>';
+                    return '<a href="'+(data || "#")+'" target="_blank">'+data+'</a>';
                 }
             },
             {
                 targets: 'url',
                 render: function(data, type, row, meta){
-                    return '<a href="'+(data || "#")+'" target="_blank">'+truncateString(data, 50)+'</a>';
+                    return '<a href="'+(data || "#")+'" target="_blank">'+data+'</a>';
                 }
             }
         ]

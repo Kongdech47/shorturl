@@ -19,3 +19,10 @@ html, body{
 .dataTables_wrapper table td:first-child {
     vertical-align: middle;
 }
+
+table.dataTable tbody td {
+    max-width:50px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

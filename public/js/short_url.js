@@ -118,21 +118,9 @@ $(document).ready(function() {
                 }
             },
             {
-                targets: 'name',
-                render: function(data, type, row, meta){
-                    return truncateString(data, 25);
-                }
-            },
-            {
                 targets: 'short_url',
                 render: function(data, type, row, meta){
-                    return '<a href="'+(data || "#")+'" target="_blank">'+truncateString(data, 55)+'</a>';
-                }
-            },
-            {
-                targets: 'url',
-                render: function(data, type, row, meta){
-                    return truncateString(data, 100);
+                    return '<a href="'+(data || "#")+'" target="_blank">'+data+'</a>';
                 }
             }
         ]

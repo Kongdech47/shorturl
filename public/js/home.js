@@ -14,12 +14,12 @@ $(document).ready(function() {
             },
             {
                 data: 'url',
-                width: '200px'
+                width: '250px'
             },
             {
                 data: 'statistics',
                 className: 'text-center',
-                width: '200px'
+                width: '150px'
             },
         ],
         columnDefs: [
@@ -38,17 +38,11 @@ $(document).ready(function() {
             {
                 targets: 'short_url',
                 render: function(data, type, row, meta){
-                    var html = '<a href="'+(data || "#")+'" target="_blank">'+truncateString(data, 30)+'</a>';
+                    var html = '<a href="'+(data || "#")+'" target="_blank">'+data+'</a>';
                     if(row.name){
-                        html += '<br><small class="text-secondary">'+truncateString(row.name, 30)+'</small>';
+                        html += '<br><small class="text-secondary">'+row.name+'</small>';
                     }
                     return html;
-                }
-            },
-            {
-                targets: 'url',
-                render: function(data, type, row, meta){
-                    return truncateString(data, 35);
                 }
             }
         ]
@@ -69,12 +63,12 @@ $(document).ready(function() {
             },
             {
                 data: 'url',
-                width: '200px'
+                width: '250px'
             },
             {
                 data: 'created_at',
                 className: 'text-center',
-                width: '200px'
+                width: '150px'
             },
         ],
         columnDefs: [
@@ -93,17 +87,11 @@ $(document).ready(function() {
             {
                 targets: 'short_url',
                 render: function(data, type, row, meta){
-                    var html = '<a href="'+(data || "#")+'" target="_blank">'+truncateString(data, 30)+'</a>';
+                    var html = '<a href="'+(data || "#")+'" target="_blank">'+data+'</a>';
                     if(row.name){
-                        html += '<br><small class="text-secondary">'+truncateString(row.name, 30)+'</small>';
+                        html += '<br><small class="text-secondary">'+row.name+'</small>';
                     }
                     return html;
-                }
-            },
-            {
-                targets: 'url',
-                render: function(data, type, row, meta){
-                    return truncateString(data, 28);
                 }
             }
         ]
