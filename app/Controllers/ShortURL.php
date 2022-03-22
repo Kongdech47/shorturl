@@ -48,7 +48,7 @@ class ShortURL extends BaseController
                     $chk = false;
                     while(!$chk) {
                         $randText = generateRandomString();
-                        $short_url = base_url($randText);
+                        $short_url = getHost().$randText;
 
                         if ($this->ShortUrlModel->checkDuplicate([
                             'short_url' => $short_url
