@@ -65,6 +65,6 @@
         // console.log(listData);
     </script>
 
-    <script src="<?= base_url('js/statistics_url.js') ?>"></script>
+    <script src="<?= buildHost('js/statistics_url.js') ?>"></script>
 
 <?= $this->endSection() ?>
