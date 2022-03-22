@@ -10,3 +10,5 @@
 8. แก้ไขชื่อไฟล์จาก env เป็น .env
 9. เข้าใช้งานเว็บผ่าน Browser ที่ url localhost
 10. เสร็จสิ้น
+
+*อธิบายเพิ่มเติม ใน Dockerfile จะมีการติดตั้ง PHP GD Extension เพื่อใช้สร้าง QR Code
