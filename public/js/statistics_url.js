@@ -54,6 +54,6 @@ $(document).ready(function() {
         modalQR.find('#qr_shorturl p a').html(row_data.short_url || "");
         modalQR.find('#qr_url p a').attr('href', row_data.url || "#");
         modalQR.find('#qr_url p a').html(row_data.url || "");
-        modalQR.find('#qr_name p').html(row_data.statistics || "0");
+        modalQR.find('#qr_statistics p').html((row_data.statistics || "0") + " ครั้ง");
     }).on('shown.bs.modal', function() {}).on('hodden.bs.modal', function() {});
 } );

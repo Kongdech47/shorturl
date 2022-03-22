@@ -46,7 +46,7 @@
                         <span id="qr_url"><b class="float-start me-2">URL เดิม:</b><p class="text-break"><a href="" target="_blank"></a></p></span>
                     </div>
                     <div class="row">
-                        <span id="qr_statistics"><b class="float-start me-2">สถิติการเปิด URL แบบย่อ:</b><p class="text-break me-2"></p>ครั้ง</span>
+                        <span id="qr_statistics"><b class="float-start me-2">สถิติการเปิด URL แบบย่อ:</b><p class="text-break me-2"></p></span>
                     </div>
                 </div>
                 <div class="modal-footer">
