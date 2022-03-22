@@ -1,1 +1,4 @@
-<?php phpinfo() ?>
+<?php 
+echo ENVIRONMENT;
+phpinfo();
+?>
