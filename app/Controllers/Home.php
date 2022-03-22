@@ -17,7 +17,7 @@ class Home extends BaseController
         helper(['data']);
         $this->ShortUrlModel = new \App\Models\ShortUrlModel();
         $this->StatisticsUrlModel = new \App\Models\StatisticsUrlModel();
-        $this->actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/";
+        $this->actual_link = ENVIRONMENT == 'production' ? "https://yorurl.herokuapp.com/" : base_url();
     }
 
     public function index($short_url="")
