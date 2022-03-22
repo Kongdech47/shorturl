@@ -47,6 +47,8 @@ $routes->get('logurl', 'LogURL::index');
 $routes->get('statisticsurl', 'StatisticsURL::index');
 $routes->get('statisticsurl/(:any)', 'StatisticsURL::add/$1');
 
+$routes->get('errorlog', 'Errorlog::index');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

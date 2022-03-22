@@ -20,3 +20,10 @@ services:
             MYSQL_DATABASE: shorturl
             MYSQL_PASSWORD: 123456
             MYSQL_ROOT_PASSWORD: 123456
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - 8121:80
+        restart: always
+        environment:
+            PMA_HOST: db
