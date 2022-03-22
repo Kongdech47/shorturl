@@ -1,5 +1,30 @@
 $(document).ready(function() {
-    $('#data_list_statistics').DataTable({
+    var getListData = function(){
+        $.ajax({
+            type: "POST",
+            url: "home/ListAllStatisticsUrl",
+            data: {csrf_token: CSRF_TOKEN},
+            dataType:'json',
+            success: function(result) {
+                listStatistics = result.data || [];
+                tablestatistics.clear().draw();
+                tablestatistics.rows.add(listStatistics).draw();
+            }
+        });
+        $.ajax({
+            type: "POST",
+            url: "home/ListAllShortUrl",
+            data: {csrf_token: CSRF_TOKEN},
+            dataType:'json',
+            success: function(result) {
+                listDataShorturl = result.data || [];
+                tableshorturl.clear().draw();
+                tableshorturl.rows.add(listDataShorturl).draw();
+            }
+        });
+    }
+
+    var tablestatistics = $('#data_list_statistics').DataTable({
         data: listStatistics,
         dom: 'Brt',
         columns: [
@@ -48,7 +73,7 @@ $(document).ready(function() {
         ]
     });
 
-    $('#data_list_shorturl').DataTable({
+    var tableshorturl = $('#data_list_shorturl').DataTable({
         data: listDataShorturl,
         dom: 'Brt',
         columns: [
@@ -146,6 +171,8 @@ $(document).ready(function() {
                         $("#share-twitter button").attr('data-url', result.short_url);
 
                         $('.show-short-url').removeClass('d-none');
+
+                        getListData();
                     }
                 },
                 error: function(result) {

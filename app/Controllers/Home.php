@@ -56,6 +56,26 @@ class Home extends BaseController
         ]);
     }
 
+    public function ListAllStatisticsUrl(){
+        $data = $this->StatisticsUrlModel->getData([
+            'limit' => 10
+        ]);
+
+        return $this->response->setJSON([
+            'data' => $data
+        ]);
+    }
+
+    public function ListAllShortUrl(){
+        $data = $this->ShortUrlModel->getData([
+            'limit' => 10
+        ]);
+
+        return $this->response->setJSON([
+            'data' => $data
+        ]);
+    }
+
     public function addShortURL(){
         try {
             $input = $_POST;

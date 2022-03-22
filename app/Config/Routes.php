@@ -35,6 +35,8 @@ $routes->add('/(:any)', 'Home::index/$1');
 
 $routes->get('home', 'Home::index');
 $routes->post('home/addurl', 'Home::addShortURL');
+$routes->post('home/ListAllStatisticsUrl', 'Home::ListAllStatisticsUrl');
+$routes->post('home/ListAllShortUrl', 'Home::ListAllShortUrl');
 
 $routes->get('shorturl', 'ShortURL::index');
 $routes->get('admin', 'ShortURL::index');
