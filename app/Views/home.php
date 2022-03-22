@@ -114,7 +114,7 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-8 m-auto mb-3 text-center">
-                <img src="https://assets-global.website-files.com/5e3177cecf36f6591e4e38cb/5ea2a86505e63bdd814cf868_Logo.png" class="" width="400" alt="...">
+                <img src="https://www.freepnglogos.com/uploads/logo-website-png/logo-website-website-logo-png-transparent-background-background-15.png" class="" width="400" alt="...">
             </div>
         </div>
         <div class="row mt-5">
@@ -230,7 +230,7 @@
             <div class="row text-center">
                 <div class="col mb-3">
                     <a class="d-inline-flex align-items-center mb-2 link-light text-decoration-none" href="/" aria-label="Bootstrap">
-                    <img src="https://assets-global.website-files.com/5e3177cecf36f6591e4e38cb/5ea2a86505e63bdd814cf868_Logo.png" alt="..." width="50" class="d-block me-2">
+                    <img src="https://www.freepnglogos.com/uploads/logo-website-png/logo-website-website-logo-png-transparent-background-background-15.png" alt="..." width="50" class="d-block me-2">
                     <span class="fs-5">ShortURL</span>
                     </a>
                     <ul class="list-unstyled small text-muted">
