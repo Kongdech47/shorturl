@@ -130,8 +130,8 @@ $(document).ready(function() {
     var form = modal.find('form');
     modal.on('show.bs.modal', function(e) {
         var type = $(e.relatedTarget).data('type');
-        var table_info = $('table').DataTable().page.info();
-        var table_search = $('.dataTables_filter input').val();
+        // var table_info = $('table').DataTable().page.info();
+        // var table_search = $('.dataTables_filter input').val();
 
         modal.find('#myModalLabel p').html('');
         form.find('input, textarea').val('');
