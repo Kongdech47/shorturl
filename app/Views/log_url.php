@@ -61,6 +61,6 @@
         listData = JSON.parse(listData);
     </script>
 
-    <script src="<?= buildHost('js/log_url.js') ?>"></script>
+    <script src="<?= base_url('js/log_url.js') ?>"></script>
 
 <?= $this->endSection() ?>

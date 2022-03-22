@@ -46,7 +46,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="<?= buildHost('css/layout.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('css/layout.css') ?>">
 </head>
 <body class="bg-light">
     <header class="p-3 mb-3 border-bottom bg-secondary bg-gradient">
@@ -84,7 +84,7 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-8 m-auto mb-3 text-center">
-                <img src="<?= buildHost('img/logo.png') ?>" class="" width="400" alt="...">
+                <img src="<?= base_url('img/logo.png') ?>" class="" width="400" alt="...">
             </div>
         </div>
         <div class="row mt-5">
@@ -200,7 +200,7 @@
             <div class="row text-center">
                 <div class="col mb-3">
                     <a class="d-inline-flex align-items-center mb-2 link-light text-decoration-none" href="/" aria-label="Bootstrap">
-                    <img src="<?= buildHost('img/logo.png') ?>" alt="..." width="50" class="d-block me-2">
+                    <img src="<?= base_url('img/logo.png') ?>" alt="..." width="50" class="d-block me-2">
                     <span class="fs-5">ShortURL</span>
                     </a>
                     <ul class="list-unstyled small text-muted">
@@ -255,5 +255,5 @@
     var listDataShorturl = '<?= json_encode($listDataShorturl) ?>';
     listDataShorturl = JSON.parse(listDataShorturl);
 </script>
-<script src="<?= buildHost('js/layout.js') ?>"></script>
-<script src="<?= buildHost('js/home.js') ?>"></script>
+<script src="<?= base_url('js/layout.js') ?>"></script>
+<script src="<?= base_url('js/home.js') ?>"></script>

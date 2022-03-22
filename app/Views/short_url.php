@@ -85,6 +85,6 @@
         // console.log(listData);
     </script>
 
-    <script src="<?= buildHost('js/short_url.js') ?>"></script>
+    <script src="<?= base_url('js/short_url.js') ?>"></script>
 
 <?= $this->endSection() ?>
