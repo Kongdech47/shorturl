@@ -17,6 +17,7 @@ class Home extends BaseController
         helper(['data']);
         $this->ShortUrlModel = new \App\Models\ShortUrlModel();
         $this->StatisticsUrlModel = new \App\Models\StatisticsUrlModel();
+        $this->actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/";
     }
 
     public function index($short_url="")
@@ -103,7 +104,7 @@ class Home extends BaseController
                                 $string_length = strlen($string);
                                 if (!preg_match('/[^A-Za-z0-9]/', $string) && $string_length >= 5 && $string_length <= 20){
                                     $randText = $string;
-                                    $short_url = base_url($randText);
+                                    $short_url = $this->actual_link.$randText;
 
                                     if ($this->ShortUrlModel->checkDuplicate([
                                         'short_url' => $short_url
