@@ -46,7 +46,37 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="<?= base_url('css/layout.css') ?>">
+    <!-- <link rel="stylesheet" href="<?= base_url('css/layout.css') ?>"> -->
+    <style>
+        #datatable_overlay, .datatable_overlay {
+            height: 82.6%;
+            width: 88.6%;
+            position: absolute;
+            z-index: 100;
+            background-color: rgb(144 144 144);
+            color: white;
+            filter: alpha(opacity=75);
+            -moz-opacity: 0.75;
+            opacity: 0.8;
+            display: none;
+            border-radius: 5px;
+        }
+
+        html, body{
+            font-family: 'Prompt', sans-serif;
+        }
+
+        .dataTables_wrapper table td:first-child {
+            vertical-align: middle;
+        }
+
+        table.dataTable tbody td {
+            max-width:200px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
 </head>
 <body class="bg-light">
     <header class="p-3 mb-3 border-bottom bg-secondary bg-gradient">
@@ -84,7 +114,7 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-8 m-auto mb-3 text-center">
-                <img src="<?= base_url('img/logo.png') ?>" class="" width="400" alt="...">
+                <img src="https://assets-global.website-files.com/5e3177cecf36f6591e4e38cb/5ea2a86505e63bdd814cf868_Logo.png" class="" width="400" alt="...">
             </div>
         </div>
         <div class="row mt-5">
@@ -200,7 +230,7 @@
             <div class="row text-center">
                 <div class="col mb-3">
                     <a class="d-inline-flex align-items-center mb-2 link-light text-decoration-none" href="/" aria-label="Bootstrap">
-                    <img src="<?= base_url('img/logo.png') ?>" alt="..." width="50" class="d-block me-2">
+                    <img src="https://assets-global.website-files.com/5e3177cecf36f6591e4e38cb/5ea2a86505e63bdd814cf868_Logo.png" alt="..." width="50" class="d-block me-2">
                     <span class="fs-5">ShortURL</span>
                     </a>
                     <ul class="list-unstyled small text-muted">
@@ -255,5 +285,382 @@
     var listDataShorturl = '<?= json_encode($listDataShorturl) ?>';
     listDataShorturl = JSON.parse(listDataShorturl);
 </script>
-<script src="<?= base_url('js/layout.js') ?>"></script>
-<script src="<?= base_url('js/home.js') ?>"></script>
+<!-- <script src="<?= base_url('js/layout.js') ?>"></script> -->
+<!-- <script src="<?= base_url('js/home.js') ?>"></script> -->
+
+<script>
+
+    var truncateString = function (str, length) {
+        return $.trim(str) ? (str.length > length ? str.substring(0, length - 3) + '...' : str) : "";
+    }
+
+
+
+
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    });
+
+
+
+
+
+    // $('.modal').modal({
+    //     backdrop: 'static',
+    //     keyboard: false,
+    //     show: false,
+    // });
+
+
+
+
+    // $.ajaxSetup({
+    //     beforeSend: function(jqXHR, settings){
+    //         console.log(jqXHR, settings);
+    //     },
+    // });
+
+
+
+
+    // START Sweet Alert 2
+
+    var SwalLoading = function (e) {
+        e = e || {};
+        Swal.fire({
+            title: e.title || 'กำลังทำรายการ',
+            html: 'กรุณารอสักครู่...',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            showCancelButton: false,
+            didOpen: () => {
+                Swal.showLoading()
+            }
+        });
+    }
+
+    var SwalConfirm = function (e) {
+        // type = add, edit, delete
+        var icon = 'info';
+        if (e.type == 'delete') {
+            icon = 'warning';
+        }
+
+        Swal.fire({
+            title: e.title,
+            html: e.html,
+            icon: icon,
+            allowOutsideClick: false,
+            showConfirmButton: true,
+            showCancelButton: true,
+            confirmButtonText: "ยืนยัน",
+            cancelButtonText: "ยกเลิก"
+        }).then((result) => {
+            if (result.value) {
+                SwalLoading();
+
+                e.action();
+            }
+        });
+    }
+
+    var SwalShowSuccessAjax = function (data, textStatus, jqXHR) {
+        // console.log(data, textStatus, jqXHR);
+        if (data.success) {
+            Swal.fire({
+                html: data.success || '',
+                icon: 'success',
+                confirmButtonText: "ตกลง"
+            });
+            return true;
+        } else {
+            Swal.fire({
+                html: data.error || data || 'ERROR !',
+                icon: 'error',
+                confirmButtonText: "ตกลง"
+            });
+            return false;
+        }
+    }
+
+    var SwalShowErrorAjax = function (xhr, textStatus, errorThrown) {
+        // console.log(xhr, textStatus, errorThrown);
+        var text = '';
+        if (xhr.responseJSON.errors) {
+            $.each(xhr.responseJSON.errors, function (index, value) {
+                text += text !== '' ? '<br/>' : text;
+                text += value;
+            });
+        } else if (xhr.responseJSON.message) {
+            text = errorThrown;
+        } else {
+            text = 'ERROR !';
+        }
+
+        Swal.fire({
+            html: text,
+            icon: 'error',
+            confirmButtonText: "ตกลง"
+        });
+    }
+
+    var SwalShowErrorMessage = function (text) {
+        Swal.fire({
+            html: text,
+            icon: 'error',
+            confirmButtonText: "ตกลง"
+        });
+    }
+
+    var SwalShowWarningMessage = function (text) {
+        Swal.fire({
+            html: text,
+            icon: 'warning',
+            confirmButtonText: "ตกลง"
+        });
+    }
+
+    // END Sweet Alert 2
+
+
+
+
+
+    // START DATATABLE
+    //set default datatable
+    $.extend(true, $.fn.dataTable.defaults, {
+        deferRender: true,
+        scrollCollapse: true,
+        scroller: true,
+        scrollX: true,
+        // serverSide: true,
+        // processing: false,
+        // paging: true,
+        // order: [],
+        // lengthChange: false,
+        // searching: false,
+        // ordering: true,
+        // info: true,
+        // autoWidth: false,
+        responsive: true,
+        pageLength: 25,
+        // dom: '<"datatable-top">rt<"datatable-bottom"><"clear">',
+        language: {
+            zeroRecords: "ไม่พบข้อมูล",
+            emptyTable: "ไม่พบข้อมูล",
+            info: "แสดง _START_ ถึง _END_ จากทั้งหมด _TOTAL_ รายการ",
+            infoEmpty: "ไม่มีข้อมูล",
+            infoFiltered: "(กรอกจากทั้งหมด _MAX_ รายการ)",
+            lengthMenu: "แสดง _MENU_ รายการต่อหน้า",
+            search: "ค้นหา",
+            paginate: {
+                first: "แรกสุด",
+                last: "ท้ายสุด",
+                next: "ถัดไป",
+                previous: "ย้อนกลับ"
+            }
+        }
+    });
+
+    // END DATATABLE
+
+
+
+
+
+    function copyToClipboard(id) {
+        var copy_text_val = document.getElementById(id);
+        copy_text_val.select();
+        document.execCommand("copy");
+        // console.log(copy_text_val.value);
+    }
+</script>
+
+<script>
+    $(document).ready(function() {
+        var getListData = function(){
+            $.ajax({
+                type: "POST",
+                url: "home/ListAllStatisticsUrl",
+                data: {csrf_token: CSRF_TOKEN},
+                dataType:'json',
+                success: function(result) {
+                    listStatistics = result.data || [];
+                    tablestatistics.clear().draw();
+                    tablestatistics.rows.add(listStatistics).draw();
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: "home/ListAllShortUrl",
+                data: {csrf_token: CSRF_TOKEN},
+                dataType:'json',
+                success: function(result) {
+                    listDataShorturl = result.data || [];
+                    tableshorturl.clear().draw();
+                    tableshorturl.rows.add(listDataShorturl).draw();
+                }
+            });
+        }
+
+        var tablestatistics = $('#data_list_statistics').DataTable({
+            data: listStatistics,
+            dom: 'Brt',
+            columns: [
+                {
+                    data: null,
+                    className: 'text-center',
+                    width: '120px'
+                },
+                {
+                    data: 'short_url',
+                    width: '250px'
+                },
+                {
+                    data: 'url',
+                    width: '300px'
+                },
+                {
+                    data: 'statistics',
+                    className: 'text-center',
+                    width: '200px'
+                },
+            ],
+            columnDefs: [
+                {
+                    targets: '_all',
+                    orderable: false,
+                },
+                {
+                    targets: 'qrcode',
+                    render: function(data, type, row, meta){
+                        var button = '';
+                        button += '<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-key="'+meta.row+'" data-type="statisticsurl" data-bs-target="#qrModal" data-bs-toggle="tooltip" title="เปิด QR Code"><i class="fa-solid fa-qrcode"></i></button>';
+                        return button;
+                    }
+                },
+                {
+                    targets: 'short_url',
+                    render: function(data, type, row, meta){
+                        var html = '<a href="'+(data || "#")+'" target="_blank">'+data+'</a>';
+                        if(row.name){
+                            html += '<br><small class="text-secondary">'+row.name+'</small>';
+                        }
+                        return html;
+                    }
+                }
+            ]
+        });
+
+        var tableshorturl = $('#data_list_shorturl').DataTable({
+            data: listDataShorturl,
+            dom: 'Brt',
+            columns: [
+                {
+                    data: null,
+                    className: 'text-center',
+                    width: '120px'
+                },
+                {
+                    data: 'short_url',
+                    width: '250px'
+                },
+                {
+                    data: 'url',
+                    width: '300px'
+                },
+                {
+                    data: 'created_at',
+                    className: 'text-center',
+                    width: '200px'
+                },
+            ],
+            columnDefs: [
+                {
+                    targets: '_all',
+                    orderable: false,
+                },
+                {
+                    targets: 'qrcode',
+                    render: function(data, type, row, meta){
+                        var button = '';
+                        button += '<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-key="'+meta.row+'" data-type="shorturl" data-bs-target="#qrModal" data-bs-toggle="tooltip" title="เปิด QR Code"><i class="fa-solid fa-qrcode"></i></button>';
+                        return button;
+                    }
+                },
+                {
+                    targets: 'short_url',
+                    render: function(data, type, row, meta){
+                        var html = '<a href="'+(data || "#")+'" target="_blank">'+data+'</a>';
+                        if(row.name){
+                            html += '<br><small class="text-secondary">'+row.name+'</small>';
+                        }
+                        return html;
+                    }
+                }
+            ]
+        });
+
+
+        var modalQR = $("#qrModal");
+        modalQR.on('show.bs.modal', function(e) {
+            if($(e.relatedTarget).data('type') == 'statisticsurl'){
+                var row_data = listStatistics[$(e.relatedTarget).data('key')];
+            }else{
+                var row_data = listDataShorturl[$(e.relatedTarget).data('key')];
+            }
+
+            modalQR.find('#qrModalLabel p').html(row_data.name ? '"'+truncateString(row_data.name, 30)+'"' : "");
+            modalQR.find('img').attr('src', row_data.qrcode);
+            modalQR.find('img').attr('alt', row_data.name);
+
+            modalQR.find('#qr_name p').html(row_data.name || "-");
+            modalQR.find('#qr_shorturl p a').attr('href', row_data.short_url || "#");
+            modalQR.find('#qr_shorturl p a').html(row_data.short_url || "");
+            modalQR.find('#qr_url p').html(row_data.url || "-");
+        }).on('shown.bs.modal', function() {}).on('hodden.bs.modal', function() {});
+
+        
+
+        $("#btn-create_short_url").off("click.create_short_url").on("click.create_short_url", function() { 
+            var url = $('#input-create_short_url').val();
+            if(url){
+                SwalLoading({title: ' '});
+
+                var saveData = {
+                    csrf_token: CSRF_TOKEN,
+                    url: url,
+                    expect: $('#input-create_short_url-expect').val() || ""
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "home/addurl",
+                    data: saveData,
+                    dataType:'json',
+                    success: function(result) {
+                        if(SwalShowSuccessAjax(result)){
+                            var result = result.data;
+                            $("#qrcode").attr('src', result.qrcode);
+                            $("#input-copy_short_url").val(result.short_url);
+
+                            $("#download-qrcode").attr('href', result.qrcode);
+                            $("#share-facebook button").attr('data-url', result.short_url);
+                            $("#share-twitter button").attr('data-title', "ย่อลิงค์ฟรี");
+                            $("#share-twitter button").attr('data-url', result.short_url);
+
+                            $('.show-short-url').removeClass('d-none');
+
+                            getListData();
+                        }
+                    },
+                    error: function(result) {
+                        SwalShowErrorMessage(result);
+                    },
+                    complete: function(result) {}
+                });
+            }
+        });
+    } );
+</script>
