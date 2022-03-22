@@ -53,9 +53,9 @@ class Database extends Config
     public $production = [
         'DSN'      => '',
         'hostname' => 'eanl4i1omny740jw.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-        'username' => 'h0l6wuogjttnj3sd',
-        'password' => 'rjf3jn25dmop11sf',
-        'database' => 'n859sygoomxxq3m4',
+        'username' => 'pob7jyq2q1xq87o0',
+        'password' => 'yui5wsq61uw0ljmc',
+        'database' => 'i63sbjuwwrs5jnms',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,
