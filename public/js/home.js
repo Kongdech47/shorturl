@@ -35,16 +35,16 @@ $(document).ready(function() {
             },
             {
                 data: 'short_url',
-                width: '200px'
+                width: '250px'
             },
             {
                 data: 'url',
-                width: '250px'
+                width: '300px'
             },
             {
                 data: 'statistics',
                 className: 'text-center',
-                width: '150px'
+                width: '200px'
             },
         ],
         columnDefs: [
@@ -84,16 +84,16 @@ $(document).ready(function() {
             },
             {
                 data: 'short_url',
-                width: '200px'
+                width: '250px'
             },
             {
                 data: 'url',
-                width: '250px'
+                width: '300px'
             },
             {
                 data: 'created_at',
                 className: 'text-center',
-                width: '150px'
+                width: '200px'
             },
         ],
         columnDefs: [

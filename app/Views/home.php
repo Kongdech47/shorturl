@@ -153,10 +153,10 @@
             </div>
         </div>
         <div class="row my-5">
-            <div class="col-md-8 m-auto"><hr></div>
+            <div class="col-md-10 m-auto"><hr></div>
         </div>
         <div class="row mt-5">
-            <div class="col-md-8 m-auto">
+            <div class="col-md-10 m-auto">
                 <label class="form-label mb-0"><h5 class="mb-1"><b>TOP 10 URL ยอดนิยม</b></h4></label>
                 <div class="input-group input-group-sm mb-3">
                     <table class="table bg-light w-100" id="data_list_statistics">
@@ -175,7 +175,7 @@
             </div>
         </div>
         <div class="row mt-5">
-            <div class="col-md-8 m-auto">
+            <div class="col-md-10 m-auto">
                 <label class="form-label mb-0"><h5 class="mb-1"><b>TOP 10 อัพเดตล่าสุด</b></h4></label>
                 <div class="input-group input-group-sm mb-3">
                     <table class="table bg-light w-100" id="data_list_shorturl">

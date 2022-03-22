@@ -21,7 +21,7 @@ html, body{
 }
 
 table.dataTable tbody td {
-    max-width:50px;
+    max-width:200px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
