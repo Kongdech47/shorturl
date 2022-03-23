@@ -114,7 +114,7 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-8 m-auto mb-3 text-center">
-                <img src="https://www.freepnglogos.com/uploads/logo-website-png/logo-website-website-logo-png-transparent-background-background-15.png" class="" width="400" alt="...">
+                <img src="https://www.freepnglogos.com/uploads/logo-website-png/logo-website-website-logo-png-transparent-background-background-15.png" class="" width="300" alt="...">
             </div>
         </div>
         <div class="row mt-5">
@@ -188,7 +188,7 @@
         <div class="row mt-5">
             <div class="col-md-10 m-auto">
                 <label class="form-label mb-0"><h5 class="mb-1"><b>TOP 10 URL ยอดนิยม</b></h4></label>
-                <div class="input-group input-group-sm mb-3">
+                <!-- <div class="input-group input-group-sm mb-3"> -->
                     <table class="table bg-light w-100" id="data_list_statistics">
                         <thead>
                             <tr>
@@ -201,13 +201,13 @@
                         <tbody>
                         </tbody>
                     </table>
-                </div>
+                <!-- </div> -->
             </div>
         </div>
         <div class="row mt-5">
             <div class="col-md-10 m-auto">
                 <label class="form-label mb-0"><h5 class="mb-1"><b>TOP 10 อัพเดตล่าสุด</b></h4></label>
-                <div class="input-group input-group-sm mb-3">
+                <!-- <div class="input-group input-group-sm mb-3"> -->
                     <table class="table bg-light w-100" id="data_list_shorturl">
                         <thead>
                             <tr>
@@ -220,7 +220,7 @@
                         <tbody>
                         </tbody>
                     </table>
-                </div>
+                <!-- </div> -->
             </div>
         </div>
     </div>
