@@ -1,7 +1,7 @@
 วิธีติดตั้ง
 
 1. ติดตั้งโปรแกรม Docker Desktop บนเครื่อง ดาวน์โหลดที่ https://www.docker.com/products/docker-desktop/
-2. เปิดโปรแกรม Docker Desktop แล้วรอให้สถานขึ้น ENGINE RUNNING (สีเขียวล่างซ๊ายของโปรแกรม)
+2. เปิดโปรแกรม Docker Desktop แล้วรอให้สถานขึ้น ENGINE RUNNING (สีเขียวล่างซ้ายของโปรแกรม)
 3. เปิดโค้ดด้วยโปรแกรม VS Code
 4. แก้ไขชื่อไฟล์จาก .env เป็น env
 5. เปิด Terminal ใน VS Code
