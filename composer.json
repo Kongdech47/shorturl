@@ -69,7 +69,8 @@
         "cs-fix": [
             "php-cs-fixer fix --verbose --diff --config=.no-header.php-cs-fixer.dist.php",
             "php-cs-fixer fix --verbose --diff"
-        ]
+        ],
+        "postinstall": "npm run build"
     },
     "scripts-descriptions": {
         "analyze": "Run static analysis",
