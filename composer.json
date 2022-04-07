@@ -4,6 +4,7 @@
     "description": "The CodeIgniter framework v4",
     "homepage": "https://codeigniter.com",
     "license": "MIT",
+    "main": "index.php",
     "require": {
         "php": "^7.3 || ^8.0",
         "ext-curl": "*",
@@ -69,8 +70,7 @@
         "cs-fix": [
             "php-cs-fixer fix --verbose --diff --config=.no-header.php-cs-fixer.dist.php",
             "php-cs-fixer fix --verbose --diff"
-        ],
-        "postinstall": "npm run build"
+        ]
     },
     "scripts-descriptions": {
         "analyze": "Run static analysis",
