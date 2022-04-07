@@ -2,7 +2,7 @@
     "name": "codeigniter4/codeigniter4",
     "type": "project",
     "description": "The CodeIgniter framework v4",
-    "homepage": "https://kd-shorturl.herokuapp.com",
+    // "homepage": "https://codeigniter.com",
     "license": "MIT",
     "require": {
         "php": "^7.3 || ^8.0",
