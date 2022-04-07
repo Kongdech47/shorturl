@@ -29,7 +29,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="<?= base_url('css/layout.css') ?>">
+    <link rel="stylesheet" href="css/layout.css">
 </head>
 <body class="bg-light">
     <header class="p-3 mb-3 border-bottom bg-secondary bg-gradient">
@@ -102,5 +102,5 @@
 </body>
 </html>
 
-<script src="<?= base_url('js/layout.js') ?>"></script>
+<script src="js/layout.js"></script>
 <?= $this->renderSection('script') ?>

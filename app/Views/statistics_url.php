@@ -64,6 +64,6 @@
         listData = JSON.parse(listData);
     </script>
 
-    <script src="<?= base_url('js/statistics_url.js') ?>"></script>
+    <script src="js/statistics_url.js"></script>
 
 <?= $this->endSection() ?>
