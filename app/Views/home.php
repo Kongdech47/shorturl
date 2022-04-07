@@ -69,7 +69,7 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-8 m-auto mb-3 text-center">
-                <img src="https://www.freepnglogos.com/uploads/logo-website-png/logo-website-website-logo-png-transparent-background-background-15.png" class="" width="400" alt="...">
+                <img src="img/logo.png" class="" width="400" alt="...">
             </div>
         </div>
         <div class="row mt-5">
@@ -240,5 +240,6 @@
     var listDataShorturl = '<?= json_encode($listDataShorturl) ?>';
     listDataShorturl = JSON.parse(listDataShorturl);
 </script>
+
 <script src="js/layout.js"></script>
 <script src="js/home.js"></script>
