@@ -12,3 +12,6 @@
 10. เสร็จสิ้น
 
 *อธิบายเพิ่มเติม ใน Dockerfile จะมีการติดตั้ง PHP GD Extension เพื่อใช้สร้าง QR Code
+
+## 🚀 DevCard
+<a href="https://app.daily.dev/kongdech"><img src="https://api.daily.dev/devcards/e26e200080ff415da7db4f55fea0cd19.png?r=lah" width="400" alt="Kongdech's Dev Card"/></a>
