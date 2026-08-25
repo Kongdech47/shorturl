@@ -9,7 +9,7 @@ RUN apt-get upgrade -y
 
 RUN apt-get install --fix-missing -y libpq-dev
 RUN apt-get install --no-install-recommends -y libpq-dev
-RUN apt-get install -y libxml2-dev libbz2-dev zlib1g-dev
+RUN apt-get install -y libxml2-dev libbz2-dev zlib1g-dev libicu-dev
 
 RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libgd-dev
 # RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
