@@ -1,5 +1,5 @@
 {
-    "name": "kongdech47/shorturl-app",
+    "name": "shorturl-app/shorturl-app",
     "type": "project",
     "description": "Simple URL shortener with QR code generation and visit tracking, built with CodeIgniter 4.",
     "homepage": "https://codeigniter.com",

@@ -2,6 +2,8 @@
 
 ShortURL is a CodeIgniter 4 application for creating short links, generating QR codes, and tracking link usage statistics.
 
+This system is designed for Thai-language usage, and the main user interface content is currently written in Thai.
+
 ## Features
 
 - Create short URLs from the homepage
