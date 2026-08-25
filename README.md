@@ -15,7 +15,6 @@ This system is designed for Thai-language usage, and the main user interface con
 
 ## Tech Stack
 
-- PHP 7.4
 - PHP 8.1
 - CodeIgniter 4
 - MySQL
@@ -104,6 +103,50 @@ MYSQL_ROOT_PASSWORD = 123456
 3. If it does not exist, the system creates a short URL and QR code.
 4. When the short URL is opened, the system records a visit.
 5. The user is redirected to the original URL.
+
+## Example Usage
+
+Example request to create a short URL:
+
+```bash
+curl -X POST http://localhost:8080/home/addurl \
+  -d "url=https://example.com"
+```
+
+Example response:
+
+```json
+{
+  "success": "ย่อ URL เรียบร้อย",
+  "data": {
+    "short_url": "http://localhost:8080/CsNMD",
+    "qrcode": "data:image/png;base64,...",
+    "type": "new"
+  }
+}
+```
+
+Example redirect behavior:
+
+```text
+GET http://localhost:8080/CsNMD
+-> 307 Temporary Redirect
+-> https://example.com/
+```
+
+## Screenshots
+
+Homepage
+
+![Homepage](docs/screenshots/home.png)
+
+Admin page
+
+![Admin page](docs/screenshots/admin.png)
+
+Statistics page
+
+![Statistics page](docs/screenshots/statistics.png)
 
 ## Main Routes
 
