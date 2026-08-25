@@ -48,26 +48,34 @@ This project uses two main tables:
 ### Setup Steps
 
 1. Clone this repository or open the project locally.
-2. Verify that `.env` contains the correct database configuration.
-3. Start the containers:
+2. Create a local environment file:
+
+```bash
+cp .env.example .env
+```
+
+3. Verify that `.env` contains the correct database configuration for your environment.
+4. Start the containers:
 
 ```bash
 docker-compose up -d
 ```
 
-4. Run migrations to create the database tables:
+5. Start the application once and let the container install PHP dependencies automatically.
+
+6. Run migrations to create the database tables:
 
 ```bash
 docker exec shorturl_www /bin/bash -c 'php spark migrate'
 ```
 
-5. Open the application in your browser:
+7. Open the application in your browser:
 
 ```text
 http://localhost
 ```
 
-## Default `.env` Values
+## Default `.env.example` Values
 
 The current project configuration includes:
 
@@ -100,5 +108,6 @@ database.default.DBDriver = MySQLi
 ## Notes
 
 - The Docker image installs the PHP GD extension for QR code generation.
+- The container installs Composer dependencies automatically on startup if `vendor/autoload.php` is missing.
 - This project currently enables CodeIgniter `AutoRoute`, so routes should be reviewed before production use.
-- The current `.env` file contains real credentials in the repository. Secrets should be moved out of version control before deployment.
+- Local environment settings should stay in `.env`, which is now ignored by git.

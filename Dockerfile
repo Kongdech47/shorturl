@@ -32,8 +32,13 @@ RUN apt-get -y install --fix-missing zip unzip \
 # RUN docker-php-ext-install mysqli pdo pdo_mysql pdo_pgsql
 
 COPY vhost.conf /etc/apache2/sites-available/000-default.conf
+COPY docker/entrypoint.sh /usr/local/bin/docker-entrypoint-shorturl
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN chown -R www-data:www-data /var/www/html \
-    && a2enmod rewrite
+    && a2enmod rewrite \
+    && chmod +x /usr/local/bin/docker-entrypoint-shorturl
+
+ENTRYPOINT ["docker-entrypoint-shorturl"]
+CMD ["apache2-foreground"]

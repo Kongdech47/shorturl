@@ -1,1 +1,10 @@
-writable
+vendor/
+.env
+README.md.bak
+info.php
+
+writable/*
+!writable/.htaccess
+!writable/**/
+!writable/**/.gitkeep
+!writable/**/index.html
