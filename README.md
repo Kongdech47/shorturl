@@ -1,17 +1,104 @@
-วิธีติดตั้ง
+# ShortURL
 
-1. ติดตั้งโปรแกรม Docker Desktop บนเครื่อง ดาวน์โหลดที่ https://www.docker.com/products/docker-desktop/
-2. เปิดโปรแกรม Docker Desktop แล้วรอให้สถานขึ้น ENGINE RUNNING (สีเขียวล่างซ้ายของโปรแกรม)
-3. เปิดโค้ดด้วยโปรแกรม VS Code
-4. แก้ไขชื่อไฟล์จาก .env เป็น env
-5. เปิด Terminal ใน VS Code
-6. รันคำสั่ง docker-compose up -d ใน Terminal
-7. รันคำสั่ง docker exec shorturl_www /bin/bash -c 'php spark migrate' ใน Terminal เพื่อสร้าง Database 
-8. แก้ไขชื่อไฟล์จาก env เป็น .env
-9. เข้าใช้งานเว็บผ่าน Browser ที่ url localhost
-10. เสร็จสิ้น
+ShortURL is a CodeIgniter 4 application for creating short links, generating QR codes, and tracking link usage statistics.
 
-*อธิบายเพิ่มเติม ใน Dockerfile จะมีการติดตั้ง PHP GD Extension เพื่อใช้สร้าง QR Code
+## Features
 
-## 🚀 DevCard
-<a href="https://app.daily.dev/kongdech"><img src="https://api.daily.dev/devcards/e26e200080ff415da7db4f55fea0cd19.png?r=lah" width="400" alt="Kongdech's Dev Card"/></a>
+- Create short URLs from the homepage
+- Support custom slugs in some cases
+- Generate QR codes automatically for new short URLs
+- Redirect short URLs to their original destinations
+- Track link visits
+- Provide admin pages for URL management, history, and statistics
+
+## Tech Stack
+
+- PHP 7.4
+- CodeIgniter 4
+- MySQL
+- Apache
+- Docker / Docker Compose
+- `endroid/qr-code` for QR code generation
+
+## Important Structure
+
+- `app/Controllers/Home.php` homepage, short URL creation, redirect handling, and statistics logging
+- `app/Controllers/ShortURL.php` admin management for short URLs
+- `app/Controllers/LogURL.php` short URL history page
+- `app/Controllers/StatisticsURL.php` statistics page
+- `app/Models/ShortUrlModel.php` data access for the `short_url` table
+- `app/Models/StatisticsUrlModel.php` data access for the `statistics_url` table
+- `app/Database/Migrations/` database schema definitions
+- `public/js/` frontend scripts for home, admin, log, and statistics pages
+
+## Database
+
+This project uses two main tables:
+
+- `short_url` stores the original URL, short URL, QR code, and timestamps
+- `statistics_url` stores visit records for each short URL
+
+## Installation with Docker
+
+### Prerequisites
+
+- Docker Desktop installed
+- Docker engine running
+
+### Setup Steps
+
+1. Clone this repository or open the project locally.
+2. Verify that `.env` contains the correct database configuration.
+3. Start the containers:
+
+```bash
+docker-compose up -d
+```
+
+4. Run migrations to create the database tables:
+
+```bash
+docker exec shorturl_www /bin/bash -c 'php spark migrate'
+```
+
+5. Open the application in your browser:
+
+```text
+http://localhost
+```
+
+## Default `.env` Values
+
+The current project configuration includes:
+
+```env
+CI_ENVIRONMENT = development
+app.baseURL = 'http://localhost/'
+database.default.hostname = db
+database.default.database = shorturl
+database.default.username = root
+database.default.password = 123456
+database.default.DBDriver = MySQLi
+```
+
+## How It Works
+
+1. A user submits a URL from the homepage.
+2. The system checks whether that URL already exists.
+3. If it does not exist, the system creates a short URL and QR code.
+4. When the short URL is opened, the system records a visit.
+5. The user is redirected to the original URL.
+
+## Main Routes
+
+- `GET /` homepage
+- `POST /home/addurl` create a short URL
+- `GET /shorturl` admin page for managing URLs
+- `GET /logurl` URL history page
+- `GET /statisticsurl` URL statistics page
+
+## Notes
+
+- The Docker image installs the PHP GD extension for QR code generation.
+- This project currently enables CodeIgniter `AutoRoute`, so routes should be reviewed before production use.
+- The current `.env` file contains real credentials in the repository. Secrets should be moved out of version control before deployment.
