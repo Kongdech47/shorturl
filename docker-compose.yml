@@ -1,29 +1,30 @@
-version: "3"
-
 services:
     www:
         build: ./
-        container_name: shorturl_www
-        restart: always
         ports: 
-            - "80:80"
+            - "${APP_PORT:-8080}:80"
         volumes:
             - ./:/var/www/html
-        links:
+        depends_on:
             - db
     db:
         image: mysql
-        container_name: shorturl_db
-        restart: always
         command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci
         environment:
-            MYSQL_DATABASE: shorturl
-            MYSQL_PASSWORD: 123456
-            MYSQL_ROOT_PASSWORD: 123456
+            MYSQL_DATABASE: ${MYSQL_DATABASE:-shorturl}
+            MYSQL_USER: ${MYSQL_USER:-shorturl}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD:-123456}
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-123456}
+        volumes:
+            - db_data:/var/lib/mysql
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         ports:
-            - 8121:80
-        restart: always
+            - "${PHPMYADMIN_PORT:-8121}:80"
         environment:
             PMA_HOST: db
+        depends_on:
+            - db
+
+volumes:
+    db_data:

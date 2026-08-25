@@ -72,7 +72,7 @@ docker exec shorturl_www /bin/bash -c 'php spark migrate'
 7. Open the application in your browser:
 
 ```text
-http://localhost
+http://localhost:8080
 ```
 
 ## Default `.env.example` Values
@@ -82,11 +82,17 @@ The current project configuration includes:
 ```env
 CI_ENVIRONMENT = development
 app.baseURL = 'http://localhost/'
+APP_PORT = 8080
+PHPMYADMIN_PORT = 8121
 database.default.hostname = db
 database.default.database = shorturl
-database.default.username = root
+database.default.username = shorturl
 database.default.password = 123456
 database.default.DBDriver = MySQLi
+MYSQL_DATABASE = shorturl
+MYSQL_USER = shorturl
+MYSQL_PASSWORD = 123456
+MYSQL_ROOT_PASSWORD = 123456
 ```
 
 ## How It Works
