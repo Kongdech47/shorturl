@@ -8,3 +8,5 @@ writable/*
 !writable/**/
 !writable/**/.gitkeep
 !writable/**/index.html
+writable/debugbar/*.json
+test-results/
