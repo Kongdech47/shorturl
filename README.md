@@ -138,15 +138,19 @@ GET http://localhost:8080/CsNMD
 
 Homepage
 
-![Homepage](docs/screenshots/home.png)
+![Homepage](docs/screenshots/home-new.png)
 
 Admin page
 
-![Admin page](docs/screenshots/admin.png)
+![Admin page](docs/screenshots/admin-new.png)
+
+History page
+
+![History page](docs/screenshots/log-new.png)
 
 Statistics page
 
-![Statistics page](docs/screenshots/statistics.png)
+![Statistics page](docs/screenshots/statistics-new.png)
 
 ## Main Routes
 
