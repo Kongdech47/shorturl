@@ -1,30 +1,42 @@
 <?= $this->extend('layout') ?>
 
 <?= $this->section('content') ?>
-    <div class="col">
-        <div id="datatable_overlay" class="progress-bar progress-bar-striped progress-bar-streit active"><p class="m-auto">กำลังโหลดข้อมูล...</p></div>
-        <dl class="row">
-            <dt class="col-sm-8"><h2><?= $title ?></h2></dt>
-            <dd class="col-sm-4 text-end"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-type="new" data-bs-target="#myModal"><i class="fa-solid fa-plus pe-2"></i>เพิ่มข้อมูล</button></dd>
-        </dl>
+    <section class="admin-page">
+        <article class="panel-card">
+            <div class="panel-toolbar">
+                <div>
+                    <span class="page-kicker"><i class="fa-solid fa-wand-magic-sparkles"></i>จัดการลิงก์สั้น</span>
+                    <h1 class="page-title"><?= $title ?></h1>
+                    <p class="page-summary">เพิ่ม แก้ไข และลบลิงก์ที่ย่อไว้จากหน้าจอเดียว พร้อมเปิดดู QR Code ได้ทันทีโดยไม่ต้องออกจากตาราง</p>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="showShortUrlFormModal('new')"><i class="fa-solid fa-plus pe-2"></i>เพิ่มข้อมูล</button>
+            </div>
+        </article>
 
-        <div class="row">
-            <table class="table bg-light w-100" id="data_list">
-                <thead>
-                    <tr>
-                        <th scope="col" class="manage">จัดการ</th>
-                        <th scope="col" class="qrcode">QR Code</th>
-                        <th scope="col" class="name">ชื่อ</th>
-                        <th scope="col" class="short_url">URL แบบย่อ</th>
-                        <th scope="col" class="url">URL เดิม</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-
-    </div>
+        <article class="table-card position-relative">
+            <div id="datatable_overlay" class="datatable_overlay"><p class="m-auto">กำลังโหลดข้อมูล...</p></div>
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">รายการ URL ทั้งหมด</h2>
+                    <p class="section-description">ตารางนี้รองรับการค้นหาและเลื่อนดูบนหน้าจอขนาดเล็กแล้ว</p>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table w-100" id="data_list">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="manage">จัดการ</th>
+                            <th scope="col" class="qrcode">QR Code</th>
+                            <th scope="col" class="name">ชื่อ</th>
+                            <th scope="col" class="short_url">URL แบบย่อ</th>
+                            <th scope="col" class="url">URL เดิม</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </article>
+    </section>
 
 
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -193,8 +205,8 @@
                     targets: 'manage',
                     render: function(data, type, row, meta){
                         var button = '';
-                        button += '<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-key="'+meta.row+'" data-type="edit" data-bs-target="#myModal" data-bs-toggle="tooltip" title="แก้ไข"><i class="fa-solid fa-pen"></i></button>';
-                        button += ' <button type="button" class="btn btn-danger btn-sm btnDel" data-id="'+row.id+'" data-bs-toggle="tooltip" title="ลบ"><i class="fa-solid fa-trash-can"></i></button>';
+                        button += '<button type="button" class="btn btn-primary btn-sm" onclick="showShortUrlFormModal(\'edit\', '+meta.row+')" title="แก้ไข"><i class="fa-solid fa-pen"></i></button>';
+                        button += ' <button type="button" class="btn btn-danger btn-sm btnDel" data-id="'+row.id+'" title="ลบ"><i class="fa-solid fa-trash-can"></i></button>';
                         return button;
                     }
                 },
@@ -202,7 +214,7 @@
                     targets: 'qrcode',
                     render: function(data, type, row, meta){
                         var button = '';
-                        button += '<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-key="'+meta.row+'" data-bs-target="#qrModal" data-bs-toggle="tooltip" title="เปิด QR Code"><i class="fa-solid fa-qrcode"></i></button>';
+                        button += '<button type="button" class="btn btn-success btn-sm" onclick="showShortUrlQrModal('+meta.row+')" title="เปิด QR Code"><i class="fa-solid fa-qrcode"></i></button>';
                         return button;
                     }
                 },
@@ -217,10 +229,18 @@
 
         var modal = $("#myModal");
         var form = modal.find('form');
+
+        window.showShortUrlFormModal = function(type, key) {
+            var triggerButton = document.createElement('button');
+            triggerButton.dataset.type = type || 'new';
+            if (typeof key !== 'undefined') {
+                triggerButton.dataset.key = key;
+            }
+            openAppModal('myModal', triggerButton);
+        };
+
         modal.on('show.bs.modal', function(e) {
             var type = $(e.relatedTarget).data('type');
-            // var table_info = $('table').DataTable().page.info();
-            // var table_search = $('.dataTables_filter input').val();
 
             modal.find('#myModalLabel p').html('');
             form.find('input, textarea').val('');
@@ -264,7 +284,7 @@
                             dataType:'json',
                             success: function(result) {
                                 if(SwalShowSuccessAjax(result)){
-                                    modal.modal('hide');
+                                    closeAppModal(document.getElementById('myModal'));
                                     getListData();
                                 }
                             },
@@ -276,7 +296,13 @@
                     }
                 });
             });
-        }).on('shown.bs.modal', function() {}).on('hodden.bs.modal', function() {});
+        }).on('shown.bs.modal', function() {}).on('hidden.bs.modal', function() {});
+
+        window.showShortUrlQrModal = function(key) {
+            var triggerButton = document.createElement('button');
+            triggerButton.dataset.key = key;
+            openAppModal('qrModal', triggerButton);
+        };
 
         var modalQR = $("#qrModal");
         modalQR.on('show.bs.modal', function(e) {
@@ -285,7 +311,7 @@
             modalQR.find('#qrModalLabel p').html(row_data.name ? '"'+truncateString(row_data.name, 30)+'"' : "");
             modalQR.find('img').attr('src', row_data.qrcode);
             modalQR.find('img').attr('alt', row_data.name);
-        }).on('shown.bs.modal', function() {}).on('hodden.bs.modal', function() {});
+        }).on('shown.bs.modal', function() {}).on('hidden.bs.modal', function() {});
     } );
     </script>
 

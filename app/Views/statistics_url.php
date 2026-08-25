@@ -1,26 +1,35 @@
 <?= $this->extend('layout') ?>
 
 <?= $this->section('content') ?>
-    <div class="col">
-        <dl class="row">
-            <dt class="col-sm-8"><h2><?= $title ?></h2></dt>
-        </dl>
+    <section class="admin-page">
+        <article class="panel-card">
+            <span class="page-kicker"><i class="fa-solid fa-chart-column"></i>ภาพรวมการใช้งาน</span>
+            <h1 class="page-title"><?= $title ?></h1>
+            <p class="page-summary">ติดตามจำนวนการเปิดของแต่ละลิงก์แบบย่อเพื่อดูว่าลิงก์ไหนได้รับความสนใจมากที่สุด และเปิด QR Code เพื่อใช้งานต่อได้ทันที</p>
+        </article>
 
-        <div class="row">
-            <table class="table bg-light w-100" id="data_list">
-                <thead>
-                    <tr>
-                        <th scope="col" class="qrcode">QR Code</th>
-                        <th scope="col" class="name">ชื่อ</th>
-                        <th scope="col" class="short_url">URL แบบย่อ</th>
-                        <th scope="col" class="statistics">สถิติการเปิด</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-    </div>
+        <article class="table-card">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">สถิติการเปิดลิงก์</h2>
+                    <p class="section-description">ตารางเรียงตามจำนวนครั้งที่ถูกเปิด และปรับให้ดูง่ายขึ้นบนทั้งหน้าจอเล็กและหน้าจอใหญ่</p>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table w-100" id="data_list">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="qrcode">QR Code</th>
+                            <th scope="col" class="name">ชื่อ</th>
+                            <th scope="col" class="short_url">URL แบบย่อ</th>
+                            <th scope="col" class="statistics">สถิติการเปิด</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </article>
+    </section>
 
     <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -96,7 +105,7 @@
                     targets: 'qrcode',
                     render: function(data, type, row, meta){
                         var button = '';
-                        button += '<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-key="'+meta.row+'" data-bs-target="#qrModal" data-bs-toggle="tooltip" title="เปิด QR Code"><i class="fa-solid fa-qrcode"></i></button>';
+                        button += '<button type="button" class="btn btn-success btn-sm" onclick="showStatisticsQrModal('+meta.row+')" title="เปิด QR Code"><i class="fa-solid fa-qrcode"></i></button>';
                         return button;
                     }
                 },
@@ -111,6 +120,12 @@
 
 
         var modalQR = $("#qrModal");
+        var modalQRInstance = bootstrap.Modal.getOrCreateInstance(document.getElementById('qrModal'));
+        window.showStatisticsQrModal = function(key) {
+            var triggerButton = document.createElement('button');
+            triggerButton.dataset.key = key;
+            modalQRInstance.show(triggerButton);
+        };
         modalQR.on('show.bs.modal', function(e) {
             var row_data = listData[$(e.relatedTarget).data('key')];
 
