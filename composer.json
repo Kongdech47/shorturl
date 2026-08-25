@@ -1,7 +1,7 @@
 {
-    "name": "codeigniter4/codeigniter4",
+    "name": "kongdech47/shorturl-app",
     "type": "project",
-    "description": "The CodeIgniter framework v4",
+    "description": "Simple URL shortener with QR code generation and visit tracking, built with CodeIgniter 4.",
     "homepage": "https://codeigniter.com",
     "license": "MIT",
     "require": {

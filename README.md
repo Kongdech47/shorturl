@@ -1,4 +1,4 @@
-# ShortURL
+# shorturl-app
 
 ShortURL is a CodeIgniter 4 application for creating short links, generating QR codes, and tracking link usage statistics.
 
