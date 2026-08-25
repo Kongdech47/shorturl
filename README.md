@@ -14,6 +14,7 @@ ShortURL is a CodeIgniter 4 application for creating short links, generating QR 
 ## Tech Stack
 
 - PHP 7.4
+- PHP 8.1
 - CodeIgniter 4
 - MySQL
 - Apache
@@ -83,7 +84,6 @@ The current project configuration includes:
 CI_ENVIRONMENT = development
 app.baseURL = 'http://localhost/'
 APP_PORT = 8080
-PHPMYADMIN_PORT = 8121
 database.default.hostname = db
 database.default.database = shorturl
 database.default.username = shorturl
@@ -114,6 +114,7 @@ MYSQL_ROOT_PASSWORD = 123456
 ## Notes
 
 - The Docker image installs the PHP GD extension for QR code generation.
+- This project is currently based on CodeIgniter 4.1.9, so the Docker image is pinned to PHP 8.1, which is the newest PHP line officially supported by this framework version.
 - The container installs Composer dependencies automatically on startup if `vendor/autoload.php` is missing.
 - This project currently enables CodeIgniter `AutoRoute`, so routes should be reviewed before production use.
 - Local environment settings should stay in `.env`, which is now ignored by git.
